@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- from phone screens -->
+    <!-- started on 13/03/22 -->
+    <!-- last updated on 13/03/22 -->
+    <title>Chessboard v2 (#comp)</title>
+
+    <!-- general styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        html {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        body {
+            background-color: black;
+            padding: 10px;
+        }
+
+        /* chess board */
+        main {
+            /* border:1px solid red; */
+            padding: 10px;
+            width: fit-content;
+
+            position: absolute;
+            left: calc(50vw - 150px);
+            top: 10vh;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row
+        }
+
+        .row div {
+            width: 35px;
+            height: 35px;
+            ;
+        }
+
+        .detail:hover {
+            background-color: orangered;
+        }
+
+        .detail {
+            cursor: pointer;
+        }
+
+        .white {
+            background-color: white;
+        }
+
+        .black {
+            background-color: black;
+        }
+
+        /* buttons */
+        button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            /* border:1px solid red; */
+
+            position: absolute;
+            left: calc(50vw - 40px);
+            /* transform:scale(1.2); */
+        }
+
+        #btn1 {
+            background-color: white;
+            bottom: 25vh;
+        }
+
+        #btn2 {
+            background-color: black;
+            bottom: 5vh;
+        }
+
+
+        /* text */
+        #for-text {
+            width: 260px;
+
+            position: absolute;
+            bottom: 40vh;
+            left: calc(50vw - 130px);
+        }
+
+
+        /* special btn */
+        #special {
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+
+            width: 80px;
+            height: 80px;
+            border-radius: 0;
+            transform: rotate(45deg);
+        }
+    </style>
+
+    <!-- keyframes -->
+    <style>
+        @keyframes bg {
+            0% {
+                background-color: black;
+            }
+
+            20% {
+                background-color: orange;
+            }
+
+            40% {
+                background-color: aqua;
+            }
+
+            60% {
+                background-color: red;
+            }
+
+            80% {
+                background-color: blue;
+            }
+
+            100% {
+                background-color: black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- chess board -->
+    <main>
+        <!-- row 8 -->
+        <section class="row">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black" id="h8" onclick="cls()"></div>
+        </section>
+
+        <!-- row 7 -->
+        <section class="row">
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+        </section>
+
+        <!-- row 6-->
+        <section class="row">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black detail" id="f6" onclick="f6()"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+        </section>
+
+        <!-- row 5 -->
+        <section class="row">
+            <div class="black"></div>
+            <div class="white detail" id="bb5" onclick="bb5()"></div>
+            <div class="black detail" id="c5" onclick="c5()"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+        </section>
+
+        <!-- row 4 -->
+        <section class="row">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white detail" id="c4" onclick="c4()"></div>
+            <div class="black detail" id="d4" onclick="d4()"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+        </section>
+
+        <!-- row 3 -->
+        <section class="row">
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black detail" id="nc3" onclick="nc3()"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+        </section>
+
+        <!-- row 2 -->
+        <section class="row">
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+        </section>
+
+        <!-- row 1 -->
+        <section class="row">
+            <div class="black" id="a1" onclick="cls()"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+            <div class="black"></div>
+            <div class="white"></div>
+        </section>
+
+    </main>
+
+    <!-- bg btns -->
+    <button id="btn1" onclick="click1()"></button>
+    <button id="btn2" onclick="click2()"></button>
+
+    <!-- text -->
+    <p id="for-text"></p>
+
+    <!-- special btn -->
+    <button id="special"></button>
+</body>
+
+
+<!-- script -->
+<script>
+    function click1() {
+        document.querySelector("body").style.cssText = "background-color:white";
+
+        document.getElementById("btn2").style.cssText = "visibility:visible";
+        document.getElementById("special1").style.cssText = "visibility:hidden";
+    }
+
+    function click2() {
+        document.querySelector("body").style.cssText = "background-color:black";
+
+        document.getElementById("special1").style.cssText = "visibility:visible";
+        //document.querySelector("main").style.cssText = "border:1px solid red;";
+    }
+
+
+    // functions for cells on the board; openings
+    // black
+    function c5() {
+        document.getElementById("for-text").innerHTML = "1. e4 c5; Sicilian Defence";
+    }
+    function f6() {
+        document.getElementById("for-text").innerHTML = "1. d4 Nf6; Kings Indian"
+    }
+
+    // white
+    function c4() {
+        document.getElementById("for-text").innerHTML = "2. c4...; Queens Gambit"
+    }
+    function d4() {
+        document.getElementById("for-text").innerHTML = "1. d4...; London System"
+    }
+
+    function nc3() {
+        document.getElementById("for-text").innerHTML = "2. Nc3...; Vienna"
+    }
+    function bc4() {
+        document.getElementById("for-text").innerHTML = "3. Bc4...; Italian"
+    }
+    function bb5() {
+        document.getElementById("for-text").innerHTML = "3. Bb5...; Spanish/Ruy Lopez"
+    }
+
+    // clear scr
+    function cls() {
+        document.getElementById("for-text").innerHTML = "";
+    }
+
+
+// time
+</script>
+
+
+<!-- for keyframes -->
+<script>
+    // special btn
+    let bgbtn = document.getElementById("special");
+
+    bgbtn.addEventListener("click", function () {
+        document.getElementById("for-text").innerHTML = "";
+        document.getElementById("btn2").style.cssText = "visibility:hidden";
+        document.querySelector("body").style.animation = "bg 50s ease";
+    })
+</script>
+
+
+<!-- notes -->
+<!-- 
+    animation help
+    https://www.youtube.com/watch?v=4Y5RrUtxKcY
+-->
+
+</html>
